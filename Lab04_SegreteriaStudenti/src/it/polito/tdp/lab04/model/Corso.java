@@ -48,7 +48,14 @@ public class Corso {
 	public List<Studente> getStudenti() {
 		return studenti;
 	}
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return nome;
+	}
+
 	
 	
 

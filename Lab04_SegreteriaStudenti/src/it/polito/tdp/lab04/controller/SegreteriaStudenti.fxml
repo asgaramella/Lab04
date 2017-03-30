@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="442.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.lab04.controller.SegreteriaStudentiController">
+<BorderPane prefHeight="442.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.lab04.controller.SegreteriaStudentiController">
    <top>
       <Label text="Lab3_Segreteria Studenti" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -56,7 +56,7 @@
                   </Label>
                   <ImageView fx:id="btnCercaNome" fitHeight="24.0" fitWidth="25.0" onMouseClicked="#doCercaNome" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../../Desktop/image.png" />
+                        <Image url="@../../../../../../../../../Desktop/POLI/Terzo%20anno/TdP/images.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -84,7 +84,7 @@
                   <Button fx:id="btnCercaCorsi" mnemonicParsing="false" onAction="#doCercaCorsi" text="Cerca Corsi" />
                   <Button fx:id="btnIscrivi" alignment="BOTTOM_LEFT" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#doIscrivi" text="Iscrivi" textAlignment="CENTER">
                      <HBox.margin>
-                        <Insets left="420.0" />
+                        <Insets left="400.0" />
                      </HBox.margin>
                   </Button>
                </children>

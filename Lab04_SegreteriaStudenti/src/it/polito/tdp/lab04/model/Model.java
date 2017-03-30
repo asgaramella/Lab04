@@ -18,13 +18,10 @@ public class Model {
 
 
   
-  public List<String> getNomiCorsi(){
+  public List<Corso> getNomiCorsi(){
 	  CorsoDAO dao= new CorsoDAO();
-	  corsi=new LinkedList<Corso>(dao.getTuttiICorsi());
-	  LinkedList<String> ltemp=new LinkedList<String>();
-	  for(Corso ctemp:corsi)
-		  ltemp.add(ctemp.getNome());
-	  return ltemp;
+	  return dao.getTuttiICorsi();
+	 
   }
   
   public Studente studenteCercato(int mat){
@@ -34,19 +31,31 @@ public class Model {
   }
   
   
-  public LinkedList<Corso> iscritti(Corso c){
+  public LinkedList<Studente> iscritti(Corso c){
 	  CorsoDAO dao=new CorsoDAO();
 	  dao.getStudentiIscrittiAlCorso(c);
-	  
-	 
-	  
-	  
+	  LinkedList<Studente> stemp=new LinkedList<Studente>(c.getStudenti());
+	  return stemp;
+	  }
+ 
+  public LinkedList<Corso> corsiFrequentati(Studente s){
+	  StudenteDAO dao=new StudenteDAO();
+	  dao.getCorsiStudente(s);
+	  LinkedList<Corso> ctemp=new LinkedList<Corso>(s.getCorsi());
+	  return ctemp;
   }
   
-  //public Corso getCorso(String nome){
-	 for()
-	  return 
+  public boolean isIscritto(Corso c,int matricola){
+	  StudenteDAO dao=new StudenteDAO();
+	   return dao.checkIscrittoA(c, matricola);
   }
+  
+  public boolean iscriviStudente(Corso c, Studente s){
+	  CorsoDAO dao= new CorsoDAO();
+	  return dao.inscriviStudenteACorso(s, c);
+	  
+  }
+
 
 	
 	

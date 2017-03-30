@@ -1,6 +1,7 @@
 package it.polito.tdp.lab04.controller;
 
 import java.net.URL;
+import java.util.*;
 import java.util.ResourceBundle;
 
 
@@ -54,27 +55,94 @@ public class SegreteriaStudentiController {
     @FXML
     private Button btnReset;
 
+
+ 
+    
     @FXML
     void doCercaCorsi(ActionEvent event) {
+    	try{
+    	int mat=Integer.parseInt(txtMatricola.getText());
+    	Studente stemp=model.studenteCercato(mat);
+    	if(stemp!=null){
+    		LinkedList<Corso> ctemp=new LinkedList<Corso>(model.corsiFrequentati(stemp));
+    		if(ctemp.size()!=0){
+    		for(Corso c: ctemp){
+    			txtResult.appendText(c.getCodice()+"    "+Integer.toString(c.getCrediti())+"    "+c.getNome()+"   "+Integer.toString(c.getPd())+"\n");
+    		}
+    		}
+    		else
+    			txtResult.appendText("Studente non iscritto ad alcun corso!\n");
+    	}else
+    		txtResult.appendText("Studente non presente!");
+    	}
+    	catch(NumberFormatException e){
+    		txtResult.appendText("Caratteri non validi nella matricola !\n");
+    	}
 
     }
 
     @FXML
     void doCercaIscrittiCorso(ActionEvent event) {
-    	model.iscritti(comboCorso.getValue());
-
+    	Corso ctemp=comboCorso.getValue();
+    	if(ctemp!=null){
+    	LinkedList<Studente> stemp= new LinkedList<Studente>(model.iscritti(ctemp));
+    	if(stemp.size()!=0){
+    	for(Studente s:stemp){
+    		txtResult.appendText(Integer.toString(s.getMatricola())+"    "+
+    							s.getNome()+"    "+s.getCognome()+"    "+s.getCds()+"\n");
+    	} }else
+    		txtResult.appendText("Corso senza iscritti! \n");
+    	}
+    	else
+    		txtResult.appendText("Corso non selezionato!\n");
     }
 
     @FXML
     void doCercaNome(MouseEvent event) {
-    	Studente s=model.studenteCercato(Integer.parseInt(txtMatricola.getText()));
+    	try{
+    	int mat=Integer.parseInt(txtMatricola.getText());
+    	Studente s=model.studenteCercato(mat);
+    	if(s!=null){
     	txtNome.setText(s.getNome());
     	txtCognome.setText(s.getCognome());
+    	if(comboCorso.getValue()!=null){
+    		if(model.isIscritto(comboCorso.getValue(), Integer.parseInt(txtMatricola.getText())))
+    				txtResult.appendText("Studente già iscritto a questo corso!\n");
+    		else
+    			txtResult.appendText("Studente non ancora iscritto al corso!\n");
+    				
+    	 }
+    	}
+    	else
+    		txtResult.appendText("Studente non esistente! \n");
+    	}catch(NumberFormatException e){
+    		txtResult.appendText("Caratteri non validi nella matricola !\n");
+    	}
+
 
     }
+    
+   
+    
 
     @FXML
     void doIscrivi(ActionEvent event) {
+    	try{
+    	int mat=Integer.parseInt(txtMatricola.getText());
+    	Studente stemp=model.studenteCercato(mat);
+    	if(stemp!=null && comboCorso.getValue()!=null){
+    		if(!model.isIscritto(comboCorso.getValue(),stemp.getMatricola()))
+    				{
+    				if(model.iscriviStudente(comboCorso.getValue(), stemp))
+    					txtResult.appendText("Studente iscritto al corso!\n");
+    				}
+    		else
+    			txtResult.appendText("Impossile iscrizione, già iscritto!\n");
+    	}
+    	}catch(NumberFormatException e){
+    		txtResult.appendText("Caratteri non validi nella matricola !\n");
+    	}
+
 
     }
 
